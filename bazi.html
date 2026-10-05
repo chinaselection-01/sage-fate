@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BaZi Reading · SageFate 神机</title>
+<meta name="description" content="Free professional BaZi (Four Pillars) chart: ten gods, hidden stems, five-element scores, luck cycles and a twelve-year forecast."/>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+/* ===== report-specific styles ===== */
+.rp-intro p{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;font-size:16px}
+.hl{color:var(--gold-soft);font-weight:700}
+.hl2{color:var(--gold-soft)}
+.rp-h{font-size:22px;margin:38px 0 14px;padding-left:12px;border-left:4px solid var(--gold)}
+.rp-h .cn-sub{font-size:13px;color:var(--muted);font-weight:400;margin-left:10px;letter-spacing:1px}
+
+/* chart table + side */
+.rp-chart{display:grid;grid-template-columns:1fr 240px;gap:16px}
+.bzt{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);font-size:14px}
+.bzt th,.bzt td{border:1px solid var(--line);padding:9px 10px;text-align:center}
+.bzt thead th{background:rgba(212,175,55,.16);color:var(--gold-soft);font-size:13px}
+.bzt tbody th{background:rgba(212,175,55,.08);color:var(--muted);font-weight:600;font-size:12px;white-space:nowrap}
+.bzt .big{font-size:30px;font-weight:800;color:var(--gold-soft);padding:14px 8px}
+.bzt .big .wx-tag{display:block;font-size:10px;color:var(--jade);font-weight:400;margin-top:4px;letter-spacing:1px}
+.bzt .big2{font-size:20px;font-weight:800;color:var(--gold-soft)}
+.bzt .hide-gan{font-size:15px;font-weight:700;color:var(--ink)}
+.bzt .hide-gan em{font-style:normal;font-size:10px;color:var(--muted);margin-left:3px}
+.bzt.small th,.bzt.small td{padding:7px 8px;font-size:13px}
+.bzt.years th.now,.bzt.years td.now{background:rgba(212,175,55,.28);color:#0b0e1a;font-weight:800}
+.rp-side{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.side-item{padding:10px 4px;border-bottom:1px dashed var(--line)}
+.side-item:last-child{border-bottom:0}
+.si-k{font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:3px}
+.si-v{font-weight:700;color:var(--gold-soft);font-size:15px}
+.si-v small{color:var(--muted);font-weight:400}
+.si-mini{display:inline-block;font-size:11px;color:var(--muted);margin-right:8px}
+.rp-note{background:rgba(63,185,138,.08);border:1px solid rgba(63,185,138,.3);border-radius:12px;padding:12px 16px;color:var(--muted);font-size:14px;margin-top:14px}
+
+/* five element cards */
+.wx-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:14px 0}
+.wx-card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:12px;padding:14px 8px;text-align:center}
+.wx-card .wxe{font-size:26px}
+.wx-card .wxn{font-weight:800;color:var(--gold-soft);margin-top:4px}
+.wx-card .wxt{font-size:10px;color:var(--muted);margin:4px 0;min-height:24px}
+.wx-card .wxs{font-size:20px;font-weight:800;color:var(--jade)}
+.rp-verdict{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:14px 18px;margin:14px 0;font-size:15px}
+.rp-verdict.jade-line{border-left-color:var(--jade)}
+.rp-missing{background:rgba(255,99,99,.06);border:1px solid rgba(255,99,99,.25);border-radius:12px;padding:14px 18px;margin:14px 0;font-size:14px}
+.rp-missing.good{background:rgba(63,185,138,.08);border-color:rgba(63,185,138,.3)}
+.rp-missing ul{margin:8px 0 0 18px}
+.rp-missing li{margin:4px 0;color:var(--muted)}
+.rp-persona p{margin:10px 0;color:var(--ink)}
+.rp-persona strong{color:var(--gold-soft)}
+.rp-upsell{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--gold);border-radius:var(--radius);padding:26px;margin-top:38px;text-align:center}
+.rp-upsell h3{color:var(--gold-soft);margin-bottom:10px}
+.rp-upsell p{color:var(--muted);max-width:640px;margin:0 auto 18px;text-align:left}
+#report h2{margin-bottom:6px}
+
+@media (max-width:860px){
+  .rp-chart{grid-template-columns:1fr}
+  .wx-cards{grid-template-columns:repeat(2,1fr)}
+  .bzt .big{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <div class="brand"><span class="en">SageFate</span><span class="cn">神机</span></div>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="tarot.html">Tarot</a>
+      <a href="fengshui.html">Feng Shui</a>
+      <a href="name.html">Name</a>
+      <a href="zodiac.html">Zodiac</a>
+      <a href="index.html#pricing" class="nav-cta">Get a Reading</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="menu">☰</button>
+  </div>
+</header>
+
+<section class="block wrap">
+  <h2 class="section-title">Your Free BaZi Chart</h2>
+  <p class="section-sub">八字排盘 · Ten gods, hidden stems, five-element scores, life luck cycles and a twelve-year forecast — free, no sign-up.</p>
+
+  <div class="form-card">
+    <div class="field">
+      <label>Name (optional — used in your report)</label>
+      <input type="text" id="bname" placeholder="e.g. Alex"/>
+    </div>
+    <div class="field">
+      <label>Birth date</label>
+      <input type="date" id="bdate" max="2026-12-31" value="1990-01-01"/>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Birth time (24h)</label>
+        <input type="time" id="btime" value="12:00"/>
+      </div>
+      <div class="field">
+        <label>Gender</label>
+        <select id="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Birth place (for reference only)</label>
+      <input type="text" id="bplace" placeholder="e.g. London, UK"/>
+    </div>
+    <button class="btn btn-primary" id="calcBtn" style="width:100%">Reveal My Full Chart</button>
+    <div class="notice" id="notice" style="display:none"></div>
+  </div>
+
+  <div id="report" style="display:none"></div>
+</section>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div>© <span id="yr"></span> SageFate · 神机. For entertainment & self-reflection.</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a><a href="tarot.html">Tarot</a><a href="fengshui.html">Feng Shui</a><a href="name.html">Name</a><a href="zodiac.html">Zodiac</a>
+    </div>
+  </div>
+</footer>
+
+<!-- lunar.js: battle-tested Chinese calendar / BaZi engine -->
+<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.js"></script>
+<script src="js/site.js"></script>
+<script src="js/bazi.js"></script>
+<script>
+(function(){
+  var btn=document.getElementById('calcBtn');
+  var report=document.getElementById('report');
+  var notice=document.getElementById('notice');
+  function showNotice(m){notice.style.display='block';notice.innerHTML=m;}
+
+  btn.addEventListener('click',function(){
+    var d=document.getElementById('bdate').value;
+    var t=document.getElementById('btime').value;
+    var g=document.getElementById('gender').value;
+    var nm=document.getElementById('bname').value.trim();
+    if(!d||!t){showNotice('Please enter both date and time of birth.');return;}
+    if(typeof Solar==='undefined'){showNotice('Chart engine failed to load. Check your connection and retry.');return;}
+    var p=d.split('-'),tp=t.split(':');
+    var solar=Solar.fromYmdHms(+p[0],+p[1],+p[2],+tp[0],+tp[1],0);
+    var lunar=solar.getLunar();
+    var ec=lunar.getEightChar();
+    var r=SageFate.computeChart(solar,lunar,ec,g,nm,new Date().getFullYear());
+    report.innerHTML='<h2 class="section-title" style="margin-top:50px">Your BaZi Report</h2><p class="section-sub">八字排盘报告 · Generated from your exact birth data</p>'+SageFate.renderReport(r);
+    report.style.display='block';
+    notice.style.display='none';
+    report.scrollIntoView({behavior:'smooth',block:'start'});
+    var ai=document.getElementById('aiBtn');
+    if(ai){ai.addEventListener('click',function(){
+      showNotice('AI report checkout is wired up but needs your payment + AI keys. Connect Stripe and an OpenAI/Claude key, then this button generates the paid PDF. See README for steps.');
+      notice.scrollIntoView({behavior:'smooth',block:'center'});
+    });}
+  });
+})();
+</script>
+</body>
+</html>

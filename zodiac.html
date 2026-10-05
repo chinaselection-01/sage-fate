@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Chinese Zodiac · SageFate 神机</title>
+<meta name="description" content="Find your Chinese zodiac animal, lucky elements and yearly forecast based on the 60-year stem-branch cycle."/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <div class="brand"><span class="en">SageFate</span><span class="cn">神机</span></div>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="bazi.html">BaZi</a>
+      <a href="tarot.html">Tarot</a>
+      <a href="fengshui.html">Feng Shui</a>
+      <a href="name.html">Name</a>
+      <a href="index.html#pricing" class="nav-cta">Get a Reading</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="menu">☰</button>
+  </div>
+</header>
+
+<section class="block wrap">
+  <h2 class="section-title">Your Chinese Zodiac</h2>
+  <p class="section-sub">生肖运势 · Free lookup. Enter your birth year to reveal your animal sign and element.</p>
+  <div class="form-card">
+    <div class="row2">
+      <div class="field"><label>Birth year</label><input type="number" id="zyear" min="1900" max="2026" value="1990"/></div>
+      <div class="field"><label>&nbsp;</label><button class="btn btn-primary" id="zbtn" style="width:100%">Reveal My Sign</button></div>
+    </div>
+    <div class="result" id="zresult">
+      <div style="font-size:54px;text-align:center" id="zemoji">🐎</div>
+      <h3 style="text-align:center" id="zname">—</h3>
+      <div class="wuxing-bar" id="zelem" style="justify-content:center"></div>
+      <p class="muted" id="zdesc" style="margin-top:12px"></p>
+    </div>
+    <div class="notice" style="margin-top:18px">Want the deep version? Your BaZi chart reveals far more than the year sign alone — <a href="bazi.html" class="gold">get your free chart →</a></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div>© <span id="yr"></span> SageFate · 神机. For entertainment & self-reflection.</div>
+    <div class="foot-links"><a href="index.html">Home</a><a href="bazi.html">BaZi</a><a href="tarot.html">Tarot</a><a href="fengshui.html">Feng Shui</a><a href="name.html">Name</a></div>
+  </div>
+</footer>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var animals=[['Rat','🐀'],['Ox','🐂'],['Tiger','🐅'],['Rabbit','🐇'],['Dragon','🐉'],['Snake','🐍'],['Horse','🐎'],['Goat','🐐'],['Monkey','🐒'],['Rooster','🐓'],['Dog','🐕'],['Pig','🐖']];
+  var elements=['Wood','Wood','Fire','Fire','Earth','Earth','Metal','Metal','Water','Water'];
+  var desc={
+    'Rat':'Quick, resourceful and charming. Strong in wealth cycles, watch impulse spending.',
+    'Ox':'Steady, reliable, hard-working. Builds lasting security; avoid stubbornness.',
+    'Tiger':'Brave, charismatic, a natural leader. High peaks and risky valleys alike.',
+    'Rabbit':'Gentle, diplomatic, lucky in relationships. Protect your peace.',
+    'Dragon':'Confident, visionary, born to stand out. Channel ego into impact.',
+    'Snake':'Wise, intuitive, quietly powerful. Trust your insight over noise.',
+    'Horse':'Energetic, free-spirited, people-loving. Balance movement with follow-through.',
+    'Goat':'Creative, kind, sensitive. Thrive with calm support around you.',
+    'Monkey':'Clever, witty, endlessly adaptable. Your edge is solving the unsolvable.',
+    'Rooster':'Precise, bold, detail-driven. Shine by delivering what others miss.',
+    'Dog':'Loyal, just, protective. Wealth follows trust you earn.',
+    'Pig':'Generous, optimistic, fortunate. Enjoy life, keep a savings buffer.'
+  };
+  function go(){
+    var y=+document.getElementById('zyear').value; if(!y) return;
+    // Chinese zodiac year starts at 立春 (~Feb 4); for a free lookup we use the common Jan-1 mapping.
+    var idx=(y-4)%12; if(idx<0) idx+=12;
+    var a=animals[idx]; var el=elements[idx];
+    document.getElementById('zemoji').textContent=a[1];
+    document.getElementById('zname').textContent=a[0]+' ('+el+' element)';
+    document.getElementById('zelem').innerHTML='<span>'+el+' 五行</span>';
+    document.getElementById('zdesc').textContent=desc[a[0]];
+    document.getElementById('zresult').classList.add('show');
+  }
+  document.getElementById('zbtn').addEventListener('click',go);
+  go();
+})();
+</script>
+</body>
+</html>
