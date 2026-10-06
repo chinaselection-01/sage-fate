@@ -126,32 +126,6 @@
   </div>
 </footer>
 
-<!-- TLO modal: lock $1.99 launch price via email -->
-<div class="tlo-modal" id="tloModal">
-  <div class="tlo-panel">
-    <button class="tlo-close" id="tloClose" aria-label="Close">✕</button>
-    <div class="tlo-badge">⚡ LAUNCH OFFER — $1.99</div>
-    <h3>Lock Your Launch Price</h3>
-    <p>Pay with PayPal below to lock your <strong>Full AI Report</strong> at the launch price <strong>$1.99</strong> (regular $19.9) — we'll email your personalized report within 24 hours.</p>
-    <label style="display:block;text-align:left;font-size:13px;color:var(--muted);margin-bottom:6px">Your email (so we know who paid)</label>
-    <input type="email" id="tloEmail" placeholder="you@example.com" style="width:100%;padding:13px;border-radius:10px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);margin-bottom:14px;font-size:15px"/>
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" id="ppForm" onsubmit="document.getElementById('ppCustom').value=document.getElementById('tloEmail').value+' || '+document.getElementById('fChart').value;">
-      <input type="hidden" name="cmd" value="_xclick"/>
-      <input type="hidden" name="business" value="brandpartner@qq.com"/>
-      <input type="hidden" name="item_name" value="SageFate Full BaZi Report"/>
-      <input type="hidden" name="amount" value="1.99"/>
-      <input type="hidden" name="currency_code" value="USD"/>
-      <input type="hidden" name="custom" id="ppCustom" value=""/>
-      <input type="hidden" name="return" value="https://sage-fate.com/thanks.html?paid=1"/>
-      <input type="hidden" name="cancel_return" value="https://sage-fate.com/bazi.html"/>
-      <input type="hidden" name="no_note" value="1"/>
-      <input type="hidden" name="no_shipping" value="1"/>
-      <button class="btn btn-primary" style="width:100%" type="submit">Pay $1.99 with PayPal</button>
-    </form>
-  </div>
-<input type="hidden" id="fChart"/>
-</div>
-
 <!-- lunar.js: battle-tested Chinese calendar / BaZi engine -->
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.js"></script>
 <script src="js/site.js"></script>
@@ -181,40 +155,10 @@
     report.scrollIntoView({behavior:'smooth',block:'start'});
     var ai=document.getElementById('aiBtn');
     if(ai){ai.addEventListener('click',function(){
-      var modal=document.getElementById('tloModal');
-      // pass chart + birth data into hidden fields so the order email carries them
-      var summary=(r.dayGan+r.dayZhi)+' ('+r.dayWx+') · pillars '+r.pillars.map(function(p){return p.gan+p.zhi;}).join(' ')+' · pattern '+r.patternTenGod+' · favorable '+(r.favorable||[]).join('/')+' · '+g+(nm?', '+nm:'');
-      document.getElementById('fChart').value=summary;
-      modal.classList.add('open');
+      showNotice('AI report checkout is wired up but needs your payment + AI keys. Connect Stripe and an OpenAI/Claude key, then this button generates the paid PDF. See README for steps.');
+      notice.scrollIntoView({behavior:'smooth',block:'center'});
     });}
-    startCountdown();
   });
-
-  /* TLO modal close */
-  document.getElementById('tloClose').addEventListener('click',function(){
-    document.getElementById('tloModal').classList.remove('open');
-  });
-  document.getElementById('tloModal').addEventListener('click',function(e){
-    if(e.target===this) this.classList.remove('open');
-  });
-
-  /* launch-offer countdown: fixed deadline, live tick */
-  function startCountdown(){
-    var end=new Date('2026-10-13T23:59:59+08:00').getTime();
-    var el=document.getElementById('tloCount');
-    if(!el) return;
-    function tick(){
-      var s=document.querySelectorAll('#tloCount strong');
-      var diff=end-Date.now();
-      var txt = diff<=0 ? '00:00:00' : (function(){
-        var h=Math.floor(diff/3600000),m=Math.floor(diff%3600000/60000),sec=Math.floor(diff%60000/1000);
-        return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
-      })();
-      s.forEach(function(x){x.textContent=txt;});
-    }
-    tick();
-    setInterval(tick,1000);
-  }
 })();
 </script>
 </body>

@@ -325,16 +325,10 @@
       '<p><strong>Your weaknesses:</strong> ' + r.persona.con + '.</p>' +
       '<p><strong>Advice for you:</strong> ' + r.persona.adv + '.</p></div>';
 
-    /* upsell: time-limited launch offer */
-    h += '<div class="rp-upsell">' +
-      '<div class="tlo-badge">⚡ LAUNCH OFFER — TIME LIMITED</div>' +
-      '<h3>What the free chart does NOT tell you</h3>' +
-      '<p>The universal analysis above applies to everyone with the same Day Master. Your <strong>Full AI Report</strong> goes further: your own personality deep-dive, wealth timing, marriage &amp; relationship analysis, career strategy, and a year-by-year playbook for the next decade — written in plain English from YOUR exact chart.</p>' +
-      '<div class="tlo-price"><span class="price-old">$19.9</span><span class="price-new">$1.99</span><span class="price-save">SAVE 90%</span></div>' +
-      '<div class="tlo-count" id="tloCount">Launch price ends in <strong>--:--:--</strong></div>' +
-      '<button class="btn btn-primary" id="aiBtn">Claim My $1.99 Full Report →</button>' +
-      '<div class="tlo-fine">No card needed now — lock the launch price and we email your report link within 24h.</div>' +
-      '</div>';
+    /* upsell */
+    h += '<div class="rp-upsell"><h3>What the free chart does NOT tell you</h3>' +
+      '<p>The universal analysis above applies to everyone with the same Day Master. Your <strong>AI Full Report ($19.9)</strong> goes further: your own personality deep-dive, wealth timing, marriage & relationship analysis, career strategy, and a year-by-year playbook for the next decade — written in plain English from YOUR exact chart.</p>' +
+      '<button class="btn btn-primary" id="aiBtn">Get My Full AI Report — $19.9</button></div>';
     return h;
   }
 
